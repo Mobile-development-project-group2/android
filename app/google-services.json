@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928795512919",
+    "project_id": "livescore-b54ac",
+    "storage_bucket": "livescore-b54ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928795512919:android:f5ef21232b01aa19881312",
+        "android_client_info": {
+          "package_name": "com.example.advancedandroidcourse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhq3S9yj_vwU4ya6wmrFMYz-oBIOwmpI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
