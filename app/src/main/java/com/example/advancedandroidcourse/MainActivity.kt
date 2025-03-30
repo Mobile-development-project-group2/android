@@ -11,6 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.advancedandroidcourse.ui.screens.LeaguesDetailsScreen
+import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,11 +25,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AdvancedAndroidCourseTheme {
+                val navController = rememberNavController();
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    AppNavigation(navController,Modifier.padding(innerPadding))
                 }
             }
         }
@@ -37,6 +41,25 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
+
+@Composable
+fun AppNavigation(navController: NavHostController,modifier:Modifier = Modifier){
+    NavHost(
+        navController=navController,
+        startDestination = "leagues",
+        modifier =modifier
+    ){
+        composable("leagues") { LeaguesScreen(navController) }
+        composable("league_details/{leagueCode}") { backStackEntry ->
+            val leagueCode = backStackEntry.arguments?.getString("leagueCode")?.toString()
+            leagueCode?.let { LeaguesDetailsScreen(it) }
+        }
+    }
+
+
+}
+
+
 
 @Preview(showBackground = true)
 @Composable
