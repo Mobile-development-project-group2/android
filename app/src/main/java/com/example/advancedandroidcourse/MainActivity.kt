@@ -35,14 +35,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hellosunojopa $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
 fun AppNavigation(navController: NavHostController,modifier:Modifier = Modifier){
     NavHost(
         navController=navController,
@@ -59,12 +51,3 @@ fun AppNavigation(navController: NavHostController,modifier:Modifier = Modifier)
 
 }
 
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AdvancedAndroidCourseTheme {
-        Greeting("Android")
-    }
-}
