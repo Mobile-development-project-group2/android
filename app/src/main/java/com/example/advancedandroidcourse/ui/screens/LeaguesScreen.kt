@@ -56,8 +56,6 @@ fun LeaguesScreen(navController:NavController){
 fun LeagueRow(league: League,onClick:()-> Unit) {
     val context = LocalContext.current
 
-
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
