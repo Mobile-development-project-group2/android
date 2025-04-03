@@ -25,19 +25,14 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.advancedandroidcourse.R
+import com.example.advancedandroidcourse.utils.leagues
 
 data class League(val id: Number,val name: String, val logoUrl: String,val code: String)
 
 @Composable
 fun LeaguesScreen(navController:NavController){
 
-    val leagues = listOf(
-        League(39,"Premier League", "https://media.api-sports.io/football/leagues/39.png","PL"),
-        League(61,"La Liga", "https://media.api-sports.io/football/leagues/140.png","PD"),
-        League(71, "Serie A", "https://media.api-sports.io/football/leagues/71.png","SA"),
-        League(78, "Bundesliga", "https://media.api-sports.io/football/leagues/78.png","BL1"),
-        League(61,"Ligue 1","https://media.api-sports.io/football/leagues/71.png","FL1"),
-    )
+
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         items(leagues) { league ->

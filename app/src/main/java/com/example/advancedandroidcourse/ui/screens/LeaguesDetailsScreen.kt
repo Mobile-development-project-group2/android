@@ -20,11 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHost
 import coil3.compose.AsyncImage
 
 
 @Composable
-fun LeaguesDetailsScreen(leagueCode: String) {
+fun LeaguesDetailsScreen(leagueCode: String,navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,6 +34,7 @@ fun LeaguesDetailsScreen(leagueCode: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Header row for buttons
+        Text(text = "Details for league : $leagueCode")
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
