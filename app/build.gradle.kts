@@ -55,7 +55,11 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.benchmark.macro)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -68,9 +72,18 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.compose)
-    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.coil3.coil.compose)
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
-    implementation ("com.google.code.gson:gson:2.8.8")
+    implementation (libs.gson)
 
 
     kapt(libs.hilt.compiler)
