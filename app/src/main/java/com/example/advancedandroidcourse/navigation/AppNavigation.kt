@@ -1,6 +1,5 @@
 package com.example.advancedandroidcourse.navigation
 
-import TeamDetailsScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -36,7 +35,7 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
                 val leagueCode = backStackEntry.arguments?.getString("leagueCode")
                 leagueCode?.let { LeaguesDetailsScreen(it, navController) }
             }
-            composable("team_details") { TeamDetailsScreen() }
+            composable("team_details") {  }
         }
     }
 }

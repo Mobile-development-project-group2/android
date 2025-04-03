@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.hilt) // Apply Hilt plugin from version catalog
     id("com.google.gms.google-services")
     alias(libs.plugins.kapt) // Added to enable kapt for Hilt
+    id("kotlin-kapt")
+
 
 }
 
@@ -60,6 +62,7 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -72,7 +75,6 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.compose)
-    kapt(libs.hilt.compiler)
 
     implementation(libs.firebase.auth.ktx)
     implementation(libs.play.services.auth)
@@ -82,8 +84,22 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.coil3.coil.compose)
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+    implementation(libs.coil3.coil.network.okhttp)
     implementation (libs.gson)
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
+
+
+
+    implementation(libs.hilt.android.v2511)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
+
+
+
+
+
 
 
     kapt(libs.hilt.compiler)
