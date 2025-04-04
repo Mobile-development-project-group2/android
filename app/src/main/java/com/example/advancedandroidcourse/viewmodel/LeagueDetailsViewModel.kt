@@ -2,13 +2,9 @@ package com.example.advancedandroidcourse.viewmodel
 
 import LeagueDetails
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.advancedandroidcourse.model.TeamDetails
 import com.example.advancedandroidcourse.repository.LeagueRepository
-import com.example.advancedandroidcourse.ui.screens.League
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

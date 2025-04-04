@@ -2,6 +2,7 @@ package com.example.advancedandroidcourse.ui.screens
 
 import Standing
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,9 +37,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.advancedandroidcourse.R
-import com.example.advancedandroidcourse.model.Team
 import com.example.advancedandroidcourse.viewmodel.LeagueDetailsState
-import kotlinx.coroutines.flow.StateFlow
 
 
 @Composable
@@ -122,7 +121,7 @@ fun LeaguesDetailsScreen(leagueCode: String, navController: NavController) {
                 // Loop through teams and display each in a row
                 LazyColumn {
                     items(leagueDetails.standings[0].table) { team ->
-                        TeamStatsRow(team = team)
+                        TeamStatsRow(team = team,navController)
                     }
                 }
             }
@@ -155,12 +154,15 @@ fun Header() {
 }
 
 @Composable
-fun TeamStatsRow(team: Standing) {
+fun TeamStatsRow(team: Standing,navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.LightGray.copy(alpha = 0.1f))
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable {
+                navController.navigate("team_details/${team.team.id}")
+            },
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         // Team crest and name
