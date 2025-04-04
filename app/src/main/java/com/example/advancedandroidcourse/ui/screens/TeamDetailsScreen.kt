@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -29,6 +28,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.advancedandroidcourse.R
 import com.example.advancedandroidcourse.model.teamDetails.Player
+import com.example.advancedandroidcourse.model.teamDetails.RunningCompetition
 import com.example.advancedandroidcourse.viewmodel.TeamDetailsState
 import com.example.advancedandroidcourse.viewmodel.TeamDetailsViewModel
 
@@ -59,7 +59,7 @@ fun TeamDetailsScreen(teamId: Int, navController: NavController,viewModel: TeamD
 
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween // This ensures the content is spread between
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     // Team Logo
                     AsyncImage(
@@ -78,9 +78,13 @@ fun TeamDetailsScreen(teamId: Int, navController: NavController,viewModel: TeamD
 
                     // Column pushed to the right
                     Column(
-                        horizontalAlignment = Alignment.End // This aligns the column contents to the right
+                        horizontalAlignment = Alignment.End
                     ) {
-                        Text(text = team.name, style = MaterialTheme.typography.titleMedium)
+                        Row {
+                            Text(text = team.name, style = MaterialTheme.typography.titleMedium)
+                            Text(text = " (${team.tla}) ")
+                        }
+
                         Text(text = "Founded: ${team.founded}", style = MaterialTheme.typography.bodySmall)
                         Text(text = "Venue: ${team.venue}", style = MaterialTheme.typography.bodySmall)
                     }
@@ -94,24 +98,20 @@ fun TeamDetailsScreen(teamId: Int, navController: NavController,viewModel: TeamD
                     Text(text = "Contract: ${team.coach.contract.start} - ${team.coach.contract.until}", style = MaterialTheme.typography.bodyMedium)
                 }
 
+
+                Spacer(modifier = Modifier.height(24.dp))
+                RunningCompetitions(competitions = team.runningCompetitions)
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(text = "Squad", style = MaterialTheme.typography.titleMedium)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Table Header
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(text = "Player", style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
-                    Text(text = "Position", style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f), textAlign = TextAlign.End)
-                }
+
 
                 LazyColumn {
-                    itemsIndexed(team.squad) { index, player ->  // Use itemsIndexed to get the index of each player
-                        SquadItem(player = player, index = index + 1) // Pass index to SquadItem (start from 1)
+                    itemsIndexed(team.squad) { index, player ->
+                        SquadItem(player = player, index = index + 1)
                     }
                 }
             }
@@ -134,16 +134,50 @@ fun SquadItem(player: Player, index: Int) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "$index - ${player.name}",  // Prefix player name with index
+            text = "$index - ${player.name}",
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.weight(2f) // Gives more space to the name
+            modifier = Modifier.weight(2f)
         )
         Text(
             text = player.position,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.weight(1f) // Gives position less space than the name
+            modifier = Modifier.weight(1f)
         )
     }
 }
+
+@Composable
+fun RunningCompetitions(competitions: List<RunningCompetition>) {
+    Text(text = "Running Competitions", style = MaterialTheme.typography.titleMedium)
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    // List of Running Competitions
+    competitions.forEach { competition ->
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(competition.emblem)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = "Competition Emblem",
+                modifier = Modifier.size(24.dp)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = "${competition.name} (${competition.code})",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+
+    Spacer(modifier = Modifier.height(24.dp))
+}
+
 
 
