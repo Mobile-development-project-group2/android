@@ -1,26 +1,19 @@
 package com.example.advancedandroidcourse
 
-// MainActivity.kt
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.compose.rememberNavController
+import com.example.advancedandroidcourse.navigation.AppNavigation
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
 import com.google.firebase.auth.FirebaseAuth
-import com.example.advancedandroidcourse.navigation.AppNavigation
-import com.example.advancedandroidcourse.presentation.auth.LoginScreen
-import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,39 +25,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AdvancedAndroidCourseTheme {
+                // Initialize the NavController using rememberNavController
                 val navController = rememberNavController()
 
-                // Check if user is already signed in
-                val startDestination = if (firebaseAuth.currentUser != null) "leagues" else "login"
-
-                NavHost(
-                    navController = navController,
-                    startDestination = startDestination
-                ) {
-                    composable("login") {
-                        LoginScreen(
-                            onSuccess = {
-                                navController.navigate("leagues") {
-                                    popUpTo("login") { inclusive = true }
-                                }
-                            }
-                        )
-                    }
-
-                    composable("register") {
-                        RegisterScreen(
-                            onSuccess = {
-                                navController.navigate("leagues") {
-                                    popUpTo("register") { inclusive = true }
-                                }
-                            }
-                        )
-                    }
-
-                    composable("leagues") {
-                        AppNavigation(navController)
+                var startDestination by remember { mutableStateOf("login") } // Default to "login"
+                firebaseAuth.signOut()
+                // Use LaunchedEffect to execute code after the initial composition
+                LaunchedEffect(Unit) {
+                    // Delay the authentication check until Firebase is initialized
+                    if (firebaseAuth.currentUser != null) {
+                        startDestination = "leagues"
+                    } else {
+                        startDestination = "login"
                     }
                 }
+
+
+                // Pass the startDestination to AppNavigation
+                AppNavigation(navController = navController, startDestination = startDestination)
             }
         }
     }

@@ -4,7 +4,8 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import com.google.firebase.FirebaseApp
 
-class Myapplication : Application() {
+@HiltAndroidApp
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         // Initialize Firebase or any other SDK
@@ -12,10 +13,3 @@ class Myapplication : Application() {
     }
 }
 
-//Dependency Injection (Hilt)
-
-
-@HiltAndroidApp
-class MyApplication: Application(){
-
-}

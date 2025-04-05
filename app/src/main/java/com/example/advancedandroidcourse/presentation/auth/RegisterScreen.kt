@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun RegisterScreen(
+    navController: NavController,
     viewModel: AuthViewModel = hiltViewModel(),
     onSuccess: () -> Unit
 ) {
@@ -67,7 +68,7 @@ fun RegisterScreen(
 
         OutlinedTextField(
             value = state.confirmPassword,
-            onValueChange = viewModel::onConfirmPasswordChange, // Handle confirm password change
+            onValueChange = viewModel::onConfirmPasswordChange,
             label = { Text("Confirm Password") },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
@@ -86,6 +87,15 @@ fun RegisterScreen(
                 Text("Register")
             }
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TextButton(onClick = {
+            navController.navigate("login")
+        }) {
+            Text("Already have an account? Signin")
+        }
+
     }
 }
 
