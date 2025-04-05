@@ -1,24 +1,24 @@
 package com.example.advancedandroidcourse.navigation
 
+// AppNavigation.kt
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.appbars.AppTopBar
-import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 import com.example.advancedandroidcourse.ui.screens.LeaguesDetailsScreen
-
-//Navigation with Jetpack Navigation Component
+import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
-    // Use Scaffold to include TopAppBar globally
     Scaffold(
         topBar = {
-            // Here, we display the AppTopBar at the top of each screen
             AppTopBar(navController = navController, title = "FotScores")
         },
         modifier = modifier
@@ -26,7 +26,7 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
         NavHost(
             navController = navController,
             startDestination = "leagues",
-            modifier = Modifier.padding(paddingValues)  // Apply padding for Scaffold content
+            modifier = Modifier.padding(paddingValues)
         ) {
             composable("leagues") {
                 LeaguesScreen(navController)
@@ -35,7 +35,6 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
                 val leagueCode = backStackEntry.arguments?.getString("leagueCode")
                 leagueCode?.let { LeaguesDetailsScreen(it, navController) }
             }
-            composable("team_details") {  }
         }
     }
 }
