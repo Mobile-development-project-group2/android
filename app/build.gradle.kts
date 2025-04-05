@@ -3,11 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt) // Apply Hilt plugin from version catalog
-    id("com.google.gms.google-services")
-    alias(libs.plugins.kapt) // Added to enable kapt for Hilt
-    id("kotlin-kapt")
-
-
+    id("com.google.gms.google-services")  // Apply Google Services plugin
+    alias(libs.plugins.kapt) // Enable KAPT for Hilt
+    id("kotlin-kapt") // Ensure Kotlin KAPT is included
 }
 
 android {
@@ -33,20 +31,23 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
-
+    // AndroidX dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -58,53 +59,42 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.firebase.auth)
-    implementation(libs.androidx.credentials)
-    implementation(libs.androidx.credentials.play.services.auth)
-    implementation(libs.googleid)
-    implementation(libs.androidx.runtime.livedata)
+
+    // Firebase Authentication and Firestore
+    implementation(platform(libs.firebase.bom)) // Firebase BOM (manage versions)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth) // Firebase auth SDK
+
+    // Google SignIn and other Firebase dependencies
+    implementation(libs.googleid)  // Google Sign-In dependency
+    implementation(libs.play.services.auth)  // Google Play services auth
+
+    // Hilt Dependency Injection
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
+
+    // Navigation and Lifecycle components
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    // Image loading with Coil
+    implementation(libs.coil3.coil.compose)
+    implementation(libs.coil3.coil.network.okhttp)
+
+    // Retrofit, Gson and other dependencies
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    //implementation(platform(libs.firebase.bom))
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.play.services.auth)
-
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.coil3.coil.compose)
-    implementation(libs.coil3.coil.network.okhttp)
-    implementation (libs.gson)
-    implementation(libs.retrofit)
-    implementation (libs.converter.gson)
-
-
-
-    implementation(libs.hilt.android.v2511)
-    kapt(libs.hilt.android.compiler)
-    implementation (libs.androidx.hilt.navigation.compose)
-
-
-
-
-
-
-
-
-    kapt(libs.hilt.compiler)
-
-}
-kapt {
-    correctErrorTypes = true // Ensures better error messages from Hilt
 }
