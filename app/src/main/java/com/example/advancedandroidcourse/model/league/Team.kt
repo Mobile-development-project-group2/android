@@ -1,4 +1,4 @@
-package com.example.advancedandroidcourse.model
+package com.example.advancedandroidcourse.model.league
 
 data class Team(
     val position: Int,

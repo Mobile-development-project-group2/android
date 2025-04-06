@@ -1,7 +1,6 @@
 package com.example.advancedandroidcourse.navigation
 
-// AppNavigation.kt
-
+import TeamDetailsScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -13,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.appbars.AppTopBar
+import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 import com.example.advancedandroidcourse.ui.screens.LeaguesDetailsScreen
 import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 import com.example.advancedandroidcourse.presentation.auth.LoginScreen
@@ -22,6 +22,7 @@ import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
 fun AppNavigation(navController: NavHostController, startDestination: String, modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
+            // Here, we display the AppTopBar at the top of each screen
             AppTopBar(navController = navController, title = "FotScores")
         },
         modifier = modifier
@@ -61,6 +62,10 @@ fun AppNavigation(navController: NavHostController, startDestination: String, mo
             composable("league_details/{leagueCode}") { backStackEntry ->
                 val leagueCode = backStackEntry.arguments?.getString("leagueCode")
                 leagueCode?.let { LeaguesDetailsScreen(it, navController) }
+            }
+            composable("team_details/{teamId}") { backStackEntry ->
+                val teamId = backStackEntry.arguments?.getString("teamId")?.toIntOrNull()
+                teamId?.let { TeamDetailsScreen(it, navController) }
             }
         }
     }

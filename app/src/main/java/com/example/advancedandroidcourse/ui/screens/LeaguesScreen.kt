@@ -32,8 +32,6 @@ data class League(val id: Number,val name: String, val logoUrl: String,val code:
 @Composable
 fun LeaguesScreen(navController:NavController){
 
-
-
     LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         items(leagues) { league ->
             LeagueRow(league,onClick = {
