@@ -27,9 +27,11 @@ class MainActivity : ComponentActivity() {
                 // Initialize the NavController using rememberNavController
                 val navController = rememberNavController()
 
-                var startDestination by remember { mutableStateOf("login") } // Default to "login"
+                var startDestination by remember { mutableStateOf("leagues") } // Default to "login"
                 firebaseAuth.signOut()
                 // Use LaunchedEffect to execute code after the initial composition
+
+
                 LaunchedEffect(Unit) {
                     // Delay the authentication check until Firebase is initialized
                     if (firebaseAuth.currentUser != null) {
@@ -38,6 +40,10 @@ class MainActivity : ComponentActivity() {
                         startDestination = "login"
                     }
                 }
+
+
+
+
 
 
                 // Pass the startDestination to AppNavigation

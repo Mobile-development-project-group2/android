@@ -17,6 +17,7 @@ import com.example.advancedandroidcourse.ui.screens.LeaguesDetailsScreen
 import com.example.advancedandroidcourse.ui.screens.LeaguesScreen
 import com.example.advancedandroidcourse.presentation.auth.LoginScreen
 import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
+import com.example.advancedandroidcourse.socket.LiveScoreScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController, startDestination: String, modifier: Modifier = Modifier) {
@@ -41,6 +42,13 @@ fun AppNavigation(navController: NavHostController, startDestination: String, mo
                             popUpTo("login") { inclusive = true }
                         }
                     }
+                )
+            }
+
+            composable("live_score") {
+                LiveScoreScreen(
+                    navController = navController,
+
                 )
             }
 
