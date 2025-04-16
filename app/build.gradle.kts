@@ -1,3 +1,8 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +12,19 @@ plugins {
     alias(libs.plugins.kapt) // Enable KAPT for Hilt
     id("kotlin-kapt") // Ensure Kotlin KAPT is included
 }
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(FileInputStream(localPropertiesFile))
+    }
+}
+
+val baseUrl = localProperties["BASE_URL"] as String? ?: ""
+
+
+
+
 
 android {
     namespace = "com.example.advancedandroidcourse"
@@ -20,6 +38,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+
+
+
     }
 
     buildTypes {
@@ -30,6 +52,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures {
+        compose = true
+        buildConfig=true
     }
 
     compileOptions {

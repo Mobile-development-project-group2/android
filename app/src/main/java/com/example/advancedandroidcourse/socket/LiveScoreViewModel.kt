@@ -1,5 +1,6 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.BuildConfig
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -10,15 +11,17 @@ class LiveScoreViewModel : ViewModel() {
     val goals: StateFlow<List<GoalEvent>> = socketService.goals
     val isConnected: StateFlow<Boolean> = socketService.isConnected
 
+    val baseUrl = com.example.advancedandroidcourse.BuildConfig.BASE_URL;
+
     init {
         connectToServer()
     }
 
     private fun connectToServer() {
         viewModelScope.launch {
-            // Replace with your server URL
-            val serverUrl = "http://192.168.1.110:3000"  // For emulator
-            // Use your machine's IP address for physical device, e.g., "http://192.168.1.100:3000"
+
+            val serverUrl = baseUrl
+
             socketService.connect(serverUrl)
         }
     }
