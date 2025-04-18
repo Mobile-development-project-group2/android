@@ -44,6 +44,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+        }
+    }
 }
 
 dependencies {
@@ -73,6 +79,7 @@ dependencies {
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.identity.doctypes.jvm)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
 
@@ -92,6 +99,8 @@ dependencies {
 
     //socket
     implementation(libs.socket.io.client)
+
+    implementation(libs.firebase.messaging)
 
 
     // Testing dependencies

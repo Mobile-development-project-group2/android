@@ -17,7 +17,7 @@ class LiveScoreViewModel : ViewModel() {
     private fun connectToServer() {
         viewModelScope.launch {
             // Replace with your server URL
-            val serverUrl = "http://192.168.1.110:3000"  // For emulator
+            val serverUrl = "http://10.0.2.2:3000"  // For emulator
             // Use your machine's IP address for physical device, e.g., "http://192.168.1.100:3000"
             socketService.connect(serverUrl)
         }

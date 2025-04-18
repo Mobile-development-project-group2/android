@@ -1,5 +1,7 @@
 package com.example.advancedandroidcourse
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -9,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.AppNavigation
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
@@ -31,7 +34,6 @@ class MainActivity : ComponentActivity() {
                 firebaseAuth.signOut()
                 // Use LaunchedEffect to execute code after the initial composition
 
-
                 LaunchedEffect(Unit) {
                     // Delay the authentication check until Firebase is initialized
                     if (firebaseAuth.currentUser != null) {
@@ -41,13 +43,13 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-
-
-
-
-
                 // Pass the startDestination to AppNavigation
                 AppNavigation(navController = navController, startDestination = startDestination)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
+                }
+
             }
         }
     }
