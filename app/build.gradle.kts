@@ -20,7 +20,7 @@ val localProperties = Properties().apply {
     }
 }
 
-val baseUrl = localProperties["BASE_URL"] as String? ?: ""
+val localbaseUrl = localProperties["BASE_URL"] as String? ?: ""
 
 
 
@@ -38,7 +38,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+        buildConfigField("String", "BASE_URL", "\"$localbaseUrl\"")
 
 
 

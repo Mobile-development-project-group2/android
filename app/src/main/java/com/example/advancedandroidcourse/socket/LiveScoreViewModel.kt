@@ -1,8 +1,9 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.BuildConfig
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import com.example.advancedandroidcourse.BuildConfig
+
 
 
 class LiveScoreViewModel : ViewModel() {
@@ -12,7 +13,7 @@ class LiveScoreViewModel : ViewModel() {
     val goals: StateFlow<List<GoalEvent>> = socketService.goals
     val isConnected: StateFlow<Boolean> = socketService.isConnected
 
-    val baseUrl = com.example.advancedandroidcourse.BuildConfig.BASE_URL;
+    val baseUrl = BuildConfig.BASE_URL;
 
     init {
         connectToServer()
