@@ -11,6 +11,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
@@ -19,38 +21,58 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 // Top Bar for the Matches Screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MatchesTopBar() {
     TopAppBar(
-        title = { Text("LIVESCORE") },
+        title = {
+            Text(
+                "LIVESCORE",
+                color = Color.White // Make the title text white
+            )
+        },
         actions = {
-            // Search (src) Icon on the right side
             IconButton(onClick = { /* Handle Search Icon click */ }) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search",
+                    tint = Color.White // Icon color
+                )
             }
-            // Time Logo
-            IconButton(onClick = { /* Do something */ }) {
-                Icon(imageVector = Icons.Default.Star, contentDescription = "Time Logo")
+            IconButton(onClick = { /* Handle Time Logo */ }) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Time Logo",
+                    tint = Color.White
+                )
             }
-            // Calendar Icon
-            IconButton(onClick = { /* Do something */ }) {
-                Icon(imageVector = Icons.Default.DateRange, contentDescription = "Calendar")
-
-
+            IconButton(onClick = { /* Handle Calendar Icon */ }) {
+                Icon(
+                    imageVector = Icons.Default.DateRange,
+                    contentDescription = "Calendar",
+                    tint = Color.White
+                )
             }
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color(0xFF1E3A8A), // Deep blue background (or pick any color)
+            titleContentColor = Color.White,   // Optional if you set color in Text()
+            actionIconContentColor = Color.White
+        )
     )
 }
 
 // Bottom Navigation for the Matches Screen
 @Composable
-fun MatchesBottomBar() {
+fun MatchesBottomBar(navController: NavController) {
     BottomAppBar(
         contentPadding = PaddingValues(0.dp)
     ) {
@@ -59,24 +81,20 @@ fun MatchesBottomBar() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             // Matches Icon
-            IconButton(onClick = { /* Handle Matches */ }) {
+            IconButton(onClick = { navController.navigate("matches") }) {
                 Icon(imageVector = Icons.Default.Home, contentDescription = "Matches")
             }
             // Leagues Icon
-            IconButton(onClick = { /* Handle Leagues */ }) {
+            IconButton(onClick = { navController.navigate("leagues") }) {
                 Icon(imageVector = Icons.Default.Star, contentDescription = "Leagues")
             }
-            // News Icon
-            IconButton(onClick = { /* Handle News */ }) {
-                Icon(imageVector = Icons.Default.Info, contentDescription = "News")
+            // Live Match Icon
+            IconButton(onClick = { navController.navigate("live_matches") }) {
+                Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Live Matches")
             }
-            // Following Icon
-            IconButton(onClick = { /* Handle Following */ }) {
-                Icon(imageVector = Icons.Default.Favorite, contentDescription = "Following")
-            }
-            // More Icon
-            IconButton(onClick = { /* Handle More */ }) {
-                Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
+            // User Profile Icon
+            IconButton(onClick = {navController.navigate("profile")}) {
+                Icon(imageVector = Icons.Default.Person, contentDescription = "Profile")
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.example.advancedandroidcourse.ui.screens
 
-import Match
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +28,8 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.example.advancedandroidcourse.R
+import com.example.advancedandroidcourse.presentation.auth.AuthViewModel
+import com.example.advancedandroidcourse.presentation.auth.LogoutButton
 import com.example.advancedandroidcourse.utils.leagues
 
 
@@ -45,44 +45,15 @@ fun LeaguesScreen(navController:NavController){
                 navController.navigate("league_details/${league.code}")
             })
         }
-
-        item {
-            Spacer(modifier = Modifier.height(16.dp))
-            MatchRow {
-                navController.navigate("live_score")
-            }
-        }
     }
-
-
-
 }
+
+
 
 @Composable
-fun MatchRow(onClick: () -> Unit) {
-    Row (
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp)
-            .clickable { onClick() },
-
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Real Madrid - Barcelone",
-                fontSize = 18.sp
-            )
-
-        }
-    }
+fun LogoutButton(viewModel: AuthViewModel) {
+    LogoutButton(viewModel = viewModel)
 }
-
-
 
 
 @Composable
@@ -117,6 +88,7 @@ fun LeagueRow(league: League,onClick:()-> Unit) {
         }
     }
 }
+
 
 
 

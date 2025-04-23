@@ -18,8 +18,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun LiveMatchesScreen(
-    navController: NavController,
-    matches: List<Match>
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -35,15 +34,16 @@ fun LiveMatchesScreen(
         )
 
         LazyColumn {
-            items(matches) { match ->
-                MatchRow(match = match) {
-                    navController.navigate("liveScore/${match.id}") // Assuming `match.id` exists
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                MatchRow {
+                    navController.navigate("live_score")
                 }
             }
         }
     }
 }
-
+/*
 @Composable
 fun MatchRow(match: Match, onClick: () -> Unit) {
     Card(
@@ -67,6 +67,31 @@ fun MatchRow(match: Match, onClick: () -> Unit) {
                 text = "${match.minute}'",
                 fontSize = 16.sp
             )
+        }
+    }
+}
+*/
+
+@Composable
+fun MatchRow(onClick: () -> Unit) {
+    Row (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 6.dp)
+            .clickable { onClick() },
+
+        ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            androidx.compose.material3.Text(
+                text = "Real Madrid - Barcelone",
+                fontSize = 18.sp
+            )
+
         }
     }
 }

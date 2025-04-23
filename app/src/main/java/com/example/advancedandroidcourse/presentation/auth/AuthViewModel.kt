@@ -78,6 +78,11 @@ class AuthViewModel @Inject constructor(
                 }
         }
     }
+
+    fun logout() {
+        firebaseAuth.signOut()
+        state = AuthState() // Resets to default values
+    }
 }
 
 

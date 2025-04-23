@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,14 +35,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
-import com.example.advancedandroidcourse.navigation.appbars.MatchesBottomBar
-import com.example.advancedandroidcourse.navigation.appbars.MatchesTopBar
 import java.time.LocalDate as LocalDate1
 
 
 @Composable
-fun MatchesScreen(modifier: Modifier = Modifier) {
+fun MatchesScreen(navController: NavController, modifier: Modifier = Modifier) {
     var selectedDate by remember { mutableStateOf(LocalDate1.now()) }
     var showAll by remember { mutableStateOf(false) }
 
@@ -79,27 +79,28 @@ fun MatchesScreen(modifier: Modifier = Modifier) {
     // Handle Show All / Hide All
     val displayedMatches = if (showAll) allMatches else matchesForDate
 
-    Scaffold(
-        modifier = modifier,
-        topBar = { MatchesTopBar() },
-        bottomBar = { MatchesBottomBar() }
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp) // or any padding you want
+    ) {
+        DateSelector(
+            currentDate = selectedDate,
+            onDateClick = { selectedDate = it }
+        )
 
-            DateSelector(currentDate = selectedDate, onDateClick = { selectedDate = it })
-
-
-            // Display Match List for the Selected Date
-            LazyColumn {
-                items(displayedMatches) { match ->
-                    MatchCard(match = match)
-                }
+        LazyColumn(
+            modifier = Modifier.weight(1f) // Take available space
+        ) {
+            items(displayedMatches) { match ->
+                MatchCard(match = match)
             }
-
-            // ShowHideMatches button positioned below the matches list
-            ShowHideMatches(showAll = showAll, onToggle = { showAll = !showAll })
-
         }
+
+        ShowHideMatches(
+            showAll = showAll,
+            onToggle = { showAll = !showAll }
+        )
     }
 }
 

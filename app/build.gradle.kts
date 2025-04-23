@@ -91,6 +91,7 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.accompanist.systemuicontroller)
 
     // Firebase Authentication and Firestore
     implementation(platform(libs.firebase.bom)) // Firebase BOM (manage versions)
