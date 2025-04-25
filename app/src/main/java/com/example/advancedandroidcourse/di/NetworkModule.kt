@@ -1,6 +1,7 @@
 package com.example.advancedandroidcourse.di
 
 
+import com.example.advancedandroidcourse.BuildConfig
 import com.example.advancedandroidcourse.network.LeagueApiService
 import com.example.advancedandroidcourse.network.TeamApiService
 import com.example.advancedandroidcourse.repository.LeagueRepository
@@ -19,13 +20,19 @@ import com.example.advancedandroidcourse.network.MatchApiService
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+
+    // TODO: Move every Retrofit instance to a separate module
+    val LEAGUES_ENDPOINT = BuildConfig.LEAGUE_BASE_URL;
+    val TEAMS_ENDPOINT = BuildConfig.TEAM_BASE_URL;
+    val MATCH_ENDPOINT = BuildConfig.MATCH_BASE_URL;
+
     // Provides Retrofit instance for Leagues
     @Provides
     @Singleton
     @LeagueRetrofit
     fun provideLeagueRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/competitions/")  // Leagues base URL
+            .baseUrl(LEAGUES_ENDPOINT)  // Leagues base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -36,7 +43,7 @@ object NetworkModule {
     @TeamRetrofit
     fun provideTeamRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/teams/")  // Teams base URL
+            .baseUrl(TEAMS_ENDPOINT)  // Teams base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -72,7 +79,7 @@ object NetworkModule {
     @MatchRetrofit
     fun provideMatchRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/")
+            .baseUrl(MATCH_ENDPOINT)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
