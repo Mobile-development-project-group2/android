@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+
 import com.example.advancedandroidcourse.navigation.appbars.AppTopBar
 import com.example.advancedandroidcourse.navigation.appbars.MatchesBottomBar
 import com.example.advancedandroidcourse.navigation.appbars.MatchesTopBar
@@ -27,6 +28,7 @@ import com.example.advancedandroidcourse.presentation.auth.LoginScreen
 import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
 import com.example.advancedandroidcourse.socket.LiveScoreScreen
 import com.example.advancedandroidcourse.ui.screens.LiveMatchesScreen
+import com.example.advancedandroidcourse.ui.screens.MatchesByDateScreen
 import com.example.advancedandroidcourse.ui.screens.MatchesScreen
 import com.example.advancedandroidcourse.ui.screens.UserProfileScreen
 
@@ -119,6 +121,14 @@ fun AppNavigation(navController: NavHostController, startDestination: String, mo
                 val teamId = backStackEntry.arguments?.getString("teamId")?.toIntOrNull()
                 teamId?.let { TeamDetailsScreen(it, navController) }
             }
+
+            composable("matches_by_data"){
+
+
+                MatchesByDateScreen(modifier = Modifier);
+            }
+
+
         }
     }
 }

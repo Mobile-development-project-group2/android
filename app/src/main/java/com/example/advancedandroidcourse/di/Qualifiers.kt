@@ -9,3 +9,8 @@ annotation class LeagueRetrofit
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class TeamRetrofit
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MatchRetrofit

@@ -1,8 +1,10 @@
 package com.example.advancedandroidcourse.di
 
+
 import com.example.advancedandroidcourse.network.LeagueApiService
 import com.example.advancedandroidcourse.network.TeamApiService
 import com.example.advancedandroidcourse.repository.LeagueRepository
+import com.example.advancedandroidcourse.repository.MatchRepository
 import com.example.advancedandroidcourse.repository.TeamRepository
 import dagger.Module
 import dagger.Provides
@@ -11,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import com.example.advancedandroidcourse.network.MatchApiService
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -63,5 +66,29 @@ object NetworkModule {
     fun provideTeamRepository(teamApiService: TeamApiService): TeamRepository {
         return TeamRepository(teamApiService)
     }
+
+    @Provides
+    @Singleton
+    @MatchRetrofit
+    fun provideMatchRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("http://192.168.1.110:3000/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMatchApiService(@MatchRetrofit retrofit: Retrofit): MatchApiService {
+        return retrofit.create(MatchApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMatchRepository(matchApiService: com.example.advancedandroidcourse.network.MatchApiService): MatchRepository {
+        return MatchRepository(matchApiService)
+    }
+
+
 }
 

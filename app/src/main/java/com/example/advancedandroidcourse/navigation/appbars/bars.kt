@@ -81,7 +81,7 @@ fun MatchesBottomBar(navController: NavController) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             // Matches Icon
-            IconButton(onClick = { navController.navigate("matches") }) {
+            IconButton(onClick = { navController.navigate("matches_by_data") }) {
                 Icon(imageVector = Icons.Default.Home, contentDescription = "Matches")
             }
             // Leagues Icon
