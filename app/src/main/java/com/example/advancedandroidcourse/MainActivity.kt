@@ -5,23 +5,17 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource.Companion.SideEffect
 import androidx.core.app.ActivityCompat
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.AppNavigation
-import com.example.advancedandroidcourse.ui.screens.MatchesScreen
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.FirebaseAuth
@@ -39,15 +33,15 @@ class MainActivity : ComponentActivity() {
             AdvancedAndroidCourseTheme {
                 // Initialize the NavController using rememberNavController
                 val navController = rememberNavController()
-                var startDestination by remember { mutableStateOf("leagues") } // Default to "login"
+                var startDestination by remember { mutableStateOf("leagues") }
 
                 val systemUiController = rememberSystemUiController()
-                val useDarkIcons = true // set false if your status bar bg is dark
+                val useDarkIcons = true
 
                 SideEffect {
                     systemUiController.setStatusBarColor(
-                        color = Color.White, // or any visible background
-                        darkIcons = useDarkIcons // true = black icons, false = white icons
+                        color = Color.White,
+                        darkIcons = useDarkIcons
                     )
                 }
 

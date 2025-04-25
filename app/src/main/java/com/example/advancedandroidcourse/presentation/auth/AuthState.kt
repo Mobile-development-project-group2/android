@@ -1,6 +1,5 @@
 package com.example.advancedandroidcourse.presentation.auth
 
-//Screens related to authentication
 
 data class AuthState(
     val email: String = "",

@@ -11,7 +11,7 @@ fun LogoutButton(viewModel: AuthViewModel, navController: NavController) {
         Button(onClick = {
             viewModel.logout()
             navController.navigate("login") {
-                popUpTo(0) { inclusive = true } // Remove the profile screen from the backstack
+                popUpTo(0) { inclusive = true }
             }
         }) {
             Text("Logout")

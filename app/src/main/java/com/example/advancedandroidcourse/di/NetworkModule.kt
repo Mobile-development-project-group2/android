@@ -25,7 +25,7 @@ object NetworkModule {
     @LeagueRetrofit
     fun provideLeagueRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/competitions/")  // Leagues base URL
+            .baseUrl("http://10.0.2.2:3000/api/competitions/")  // Leagues base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -36,7 +36,7 @@ object NetworkModule {
     @TeamRetrofit
     fun provideTeamRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/teams/")  // Teams base URL
+            .baseUrl("http://10.0.2.2:3000/api/teams/")  // Teams base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -72,7 +72,7 @@ object NetworkModule {
     @MatchRetrofit
     fun provideMatchRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.110:3000/api/")
+            .baseUrl("http://10.0.2.2:3000/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
