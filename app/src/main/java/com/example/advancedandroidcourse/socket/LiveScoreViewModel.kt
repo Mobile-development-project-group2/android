@@ -15,6 +15,7 @@ class LiveScoreViewModel : ViewModel() {
 
     val baseUrl = BuildConfig.BASE_URL;
 
+
     init {
         connectToServer()
     }

@@ -21,7 +21,9 @@ val localProperties = Properties().apply {
 }
 
 val localbaseUrl = localProperties["BASE_URL"] as String? ?: ""
-
+val leagueBaseUrl = localProperties.getProperty("LEAGUE_BASE_URL") ?: ""
+val teamBaseUrl = localProperties.getProperty("TEAM_BASE_URL") ?: ""
+val matchBaseUrl = localProperties.getProperty("MATCH_BASE_URL") ?: ""
 
 
 
@@ -39,6 +41,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"$localbaseUrl\"")
+        buildConfigField("String", "LEAGUE_BASE_URL", "\"$leagueBaseUrl\"")
+        buildConfigField("String", "TEAM_BASE_URL", "\"$teamBaseUrl\"")
+        buildConfigField("String", "MATCH_BASE_URL", "\"$matchBaseUrl\"")
 
 
 
