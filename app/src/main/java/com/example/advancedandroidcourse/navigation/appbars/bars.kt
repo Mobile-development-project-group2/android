@@ -2,6 +2,7 @@ package com.example.advancedandroidcourse.navigation.appbars
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,10 +20,12 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -40,13 +43,6 @@ fun MatchesTopBar() {
             )
         },
         actions = {
-            IconButton(onClick = { /* Handle Search Icon click */ }) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search",
-                    tint = Color.White // Icon color
-                )
-            }
             IconButton(onClick = { /* Handle Time Logo */ }) {
                 Icon(
                     imageVector = Icons.Default.Star,
@@ -63,7 +59,7 @@ fun MatchesTopBar() {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color(0xFF1E3A8A), // Deep blue background (or pick any color)
+            containerColor = MaterialTheme.colorScheme.primary, // Deep blue background (or pick any color)
             titleContentColor = Color.White,   // Optional if you set color in Text()
             actionIconContentColor = Color.White
         )
@@ -80,21 +76,44 @@ fun MatchesBottomBar(navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            // Matches Icon
-            IconButton(onClick = { navController.navigate("matches_by_data") }) {
-                Icon(imageVector = Icons.Default.Home, contentDescription = "Matches")
+            // Matches Icon with Text
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IconButton(onClick = { navController.navigate("matches_by_data") }) {
+                    Icon(imageVector = Icons.Default.Home, contentDescription = "Matches")
+                }
+                Text(text = "Matches", style = MaterialTheme.typography.labelSmall)
             }
-            // Leagues Icon
-            IconButton(onClick = { navController.navigate("leagues") }) {
-                Icon(imageVector = Icons.Default.Star, contentDescription = "Leagues")
+
+            // Leagues Icon with Text
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IconButton(onClick = { navController.navigate("leagues") }) {
+                    Icon(imageVector = Icons.Default.Star, contentDescription = "Leagues")
+                }
+                Text(text = "Leagues", style = MaterialTheme.typography.labelSmall)
             }
-            // Live Match Icon
-            IconButton(onClick = { navController.navigate("live_matches") }) {
-                Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Live Matches")
+
+            // Live Match Icon with Text
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IconButton(onClick = { navController.navigate("live_matches") }) {
+                    Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Live Matches")
+                }
+                Text(text = "Live Matches", style = MaterialTheme.typography.labelSmall)
             }
-            // User Profile Icon
-            IconButton(onClick = {navController.navigate("profile")}) {
-                Icon(imageVector = Icons.Default.Person, contentDescription = "Profile")
+
+            // User Profile Icon with Text
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IconButton(onClick = { navController.navigate("profile") }) {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = "Profile")
+                }
+                Text(text = "Profile", style = MaterialTheme.typography.labelSmall)
             }
         }
     }

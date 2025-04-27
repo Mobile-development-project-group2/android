@@ -1,6 +1,7 @@
 package com.example.advancedandroidcourse.presentation.auth
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -20,10 +22,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.advancedandroidcourse.R
+
 
 @Composable
 fun LoginScreen(
@@ -55,6 +60,13 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "App Logo",
+            modifier = Modifier
+                .height(100.dp)
+                .padding(bottom = 24.dp)
+        )
         OutlinedTextField(
             value = state.email,
             onValueChange = viewModel::onEmailChange,
@@ -78,7 +90,10 @@ fun LoginScreen(
             onClick = { viewModel.signInWithEmailAndPassword() },
             modifier = Modifier.fillMaxWidth(),
             enabled = !state.isLoading,
-
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,  // Primary color for the background
+                contentColor = MaterialTheme.colorScheme.onPrimary // Color for the text/content
+            )
         ) {
             if (state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.size(20.dp))
